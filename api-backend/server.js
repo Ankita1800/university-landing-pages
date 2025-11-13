@@ -15,6 +15,35 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/delhi-university', express.static(path.join(__dirname, '../delhi-university-landing')));
 app.use('/mit', express.static(path.join(__dirname, '../mit-landing')));
 
+// Root route - API information
+app.get('/', (req, res) => {
+    res.json({
+        success: true,
+        message: 'University Landing Pages API',
+        version: '1.0.0',
+        endpoints: {
+            landingPages: {
+                mit: '/mit',
+                delhiUniversity: '/delhi-university'
+            },
+            api: {
+                health: '/api/health',
+                universities: '/api/universities',
+                universityDetails: '/api/universities/:id',
+                programs: '/api/programs',
+                admissions: '/api/admissions',
+                statistics: '/api/statistics',
+                fees: '/api/fees/:university',
+                states: '/api/states',
+                leads: 'POST /api/leads',
+                applications: 'POST /api/applications',
+                contact: 'POST /api/contact'
+            }
+        },
+        documentation: 'See README.md for full API documentation'
+    });
+});
+
 // API Routes
 app.get('/api/health', (req, res) => {
     res.json({ 
