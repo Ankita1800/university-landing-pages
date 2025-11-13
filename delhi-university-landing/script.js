@@ -15,7 +15,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Pipedream webhook URL - Replace with your actual Pipedream endpoint
 const PIPEDREAM_WEBHOOK_URL = 'https://eojt37qtzxgief2.m.pipedream.net';
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://university-landing-pages.onrender.com';
 
 // Lead Form Modal Functionality
 const leadFormModal = document.getElementById('leadFormModal');
