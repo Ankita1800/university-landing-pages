@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api-backend/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api-backend/server.js"
+    },
+    {
+      "src": "/mit/(.*)",
+      "dest": "/mit-landing/$1"
+    },
+    {
+      "src": "/delhi-university/(.*)",
+      "dest": "/delhi-university-landing/$1"
+    }
+  ]
+}

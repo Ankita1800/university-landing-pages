@@ -16,16 +16,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const ctaButton = document.querySelector('.cta-button');
 if (ctaButton) {
     ctaButton.addEventListener('click', () => {
-        alert('Application process will be available soon!');
-        // In production, this would redirect to application form
-        // window.location.href = '/apply';
+        // Scroll to programs section
+        const programsSection = document.querySelector('#programs');
+        if (programsSection) {
+            programsSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     });
 }
 
-// Add animation on scroll
+// Contact Button functionality
+const contactButton = document.querySelector('.contact-button');
+if (contactButton) {
+    contactButton.addEventListener('click', () => {
+        alert('Admissions information will be available soon! Visit mit.edu for current information.');
+        // In production, this would open a contact form or redirect
+        // window.location.href = 'https://mitadmissions.org/contact/';
+    });
+}
+
+// Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -37,13 +52,64 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections
+// Observe all sections for animation
 document.querySelectorAll('section').forEach(section => {
     section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    section.style.transform = 'translateY(30px)';
+    section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     observer.observe(section);
 });
+
+// Program cards staggered animation
+const programCards = document.querySelectorAll('.program-card');
+programCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+});
+
+const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+programCards.forEach(card => cardObserver.observe(card));
+
+// Stats counter animation
+const stats = document.querySelectorAll('.stat h3');
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+            entry.target.classList.add('counted');
+            animateValue(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+stats.forEach(stat => statsObserver.observe(stat));
+
+function animateValue(element) {
+    const text = element.textContent;
+    const hasPlus = text.includes('+');
+    const value = parseInt(text.replace(/[^0-9]/g, ''));
+    
+    if (!isNaN(value)) {
+        let current = 0;
+        const increment = value / 50;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= value) {
+                current = value;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current) + (hasPlus ? '+' : '');
+        }, 30);
+    }
+}
 
 // Header scroll effect
 let lastScroll = 0;
@@ -61,18 +127,19 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-console.log('Delhi University landing page initialized');
+console.log('MIT landing page initialized');
 
 // Lead Form Modal Functionality
 const leadFormModal = document.getElementById('leadFormModal');
 const applyNowBtn = document.getElementById('applyNowBtn');
-const getStartedBtn = document.getElementById('getStartedBtn');
+const contactAdmissionsBtn = document.getElementById('contactAdmissionsBtn');
+const requestInfoBtn = document.getElementById('requestInfoBtn');
 const closeModal = document.getElementById('closeModal');
 const leadForm = document.getElementById('leadForm');
 const formMessage = document.getElementById('formMessage');
 
 // Pipedream webhook URL - Replace with your actual Pipedream endpoint
-const PIPEDREAM_WEBHOOK_URL = 'https://eojt37qtzxgief2.m.pipedream.net';
+const PIPEDREAM_WEBHOOK_URL = 'https://eodq2e90anw6xqz.m.pipedream.net';
 
 // Open modal
 function openModal() {
@@ -90,7 +157,8 @@ function closeModalFunc() {
 
 // Event listeners for opening modal
 if (applyNowBtn) applyNowBtn.addEventListener('click', openModal);
-if (getStartedBtn) getStartedBtn.addEventListener('click', openModal);
+if (contactAdmissionsBtn) contactAdmissionsBtn.addEventListener('click', openModal);
+if (requestInfoBtn) requestInfoBtn.addEventListener('click', openModal);
 if (closeModal) closeModal.addEventListener('click', closeModalFunc);
 
 // Close modal on outside click
@@ -119,14 +187,14 @@ leadForm.addEventListener('submit', async (e) => {
     // Get form data
     const formData = new FormData(leadForm);
     const data = {
-        university: 'Delhi University',
+        university: 'MIT',
         name: formData.get('name'),
         email: formData.get('email'),
         phone: formData.get('phone'),
         program: formData.get('program'),
         message: formData.get('message'),
         timestamp: new Date().toISOString(),
-        source: 'Delhi University Landing Page'
+        source: 'MIT Landing Page'
     };
     
     try {

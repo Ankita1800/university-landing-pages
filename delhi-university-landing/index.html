@@ -27,6 +27,35 @@
             }
         }
     </script>
+    <style>
+        :root {
+            --switch-btn-bg: #D4AF37;
+            --switch-btn-text: #800020;
+            --switch-btn-hover: #C19B2B;
+        }
+        
+        .switch-btn {
+            display: inline-block;
+            width: 260px;
+            padding: 12px 28px;
+            background-color: var(--switch-btn-bg);
+            color: var(--switch-btn-text);
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            white-space: nowrap;
+        }
+        
+        .switch-btn:hover {
+            background-color: var(--switch-btn-hover);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-1px);
+        }
+    </style>
 </head>
 <body class="font-sans text-gray-900">
     <header class="bg-du-burgundy text-white fixed w-full top-0 z-50 shadow-lg">
@@ -48,7 +77,7 @@
                     <li><a href="#admissions" class="hover:text-du-gold transition-colors duration-200">Admissions</a></li>
                     <li><a href="#contact" class="hover:text-du-gold transition-colors duration-200">Contact</a></li>
                 </ul>
-                <a href="../mit-landing/index.html" class="bg-du-gold text-du-burgundy px-5 py-2.5 rounded-full text-sm font-bold hover:bg-yellow-400 transition-all duration-200 shadow-md hover:shadow-lg whitespace-nowrap">
+                <a href="../mit-landing/index.html" class="switch-btn">
                     Switch to MIT →
                 </a>
             </div>
@@ -70,7 +99,7 @@
                 <li><a href="#admissions" class="block hover:text-du-gold transition-colors duration-200">Admissions</a></li>
                 <li><a href="#contact" class="block hover:text-du-gold transition-colors duration-200">Contact</a></li>
                 <li class="pt-2">
-                    <a href="../mit-landing/index.html" class="block text-center bg-du-gold text-du-burgundy px-5 py-2.5 rounded-full text-sm font-bold hover:bg-yellow-400 transition-all duration-200">
+                    <a href="../mit-landing/index.html" class="switch-btn block">
                         Switch to MIT →
                     </a>
                 </li>
@@ -79,18 +108,23 @@
     </header>
 
     <main class="mt-16">
-        <section class="bg-gradient-to-br from-du-burgundy via-du-navy to-gray-900 text-white text-center py-40 px-8 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute top-20 left-20 w-64 h-64 bg-du-gold rounded-full blur-3xl"></div>
-                <div class="absolute bottom-20 right-20 w-96 h-96 bg-du-gold rounded-full blur-3xl"></div>
+        <section class="bg-gradient-to-br from-du-burgundy via-du-navy to-gray-900 text-white text-center py-40 px-8 relative overflow-hidden min-h-screen flex items-center">
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-20 left-20 w-64 h-64 bg-du-gold rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-20 right-20 w-96 h-96 bg-du-gold rounded-full blur-3xl"></div>
+                </div>
             </div>
-            <div class="relative z-10">
-                <div class="inline-block mb-4 px-6 py-2 bg-du-gold/20 backdrop-blur-sm rounded-full border border-du-gold/30">
+            <div class="relative z-10 max-w-5xl mx-auto w-full">
+                <div class="inline-block mb-6 px-6 py-2 bg-du-gold/20 backdrop-blur-sm rounded-full border border-du-gold/30">
                     <span class="text-du-gold font-semibold text-sm tracking-wider">ESTABLISHED 1922</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">Welcome to <span class="text-du-gold">Delhi University</span></h1>
-                <p class="text-xl md:text-2xl mb-10 font-light tracking-wide text-gray-200">Empowering minds, shaping futures</p>
-                <button class="bg-du-gold text-du-burgundy px-10 py-4 rounded-full text-lg font-bold hover:bg-yellow-400 hover:scale-105 hover:shadow-2xl transition-all duration-300">Apply Now</button>
+                <h1 class="text-6xl md:text-7xl font-bold mb-6 leading-tight">Welcome to <br/><span class="text-du-gold">Delhi University</span></h1>
+                <p class="text-2xl md:text-3xl mb-4 font-light italic text-gray-300">Empowering minds, shaping futures</p>
+                <p class="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">A legacy of academic excellence and innovation since 1922</p>
+                <div class="flex justify-center">
+                    <button id="applyNowBtn" class="bg-du-gold text-du-burgundy px-10 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-400 hover:scale-105 hover:shadow-2xl transition-all duration-300">Apply Now</button>
+                </div>
             </div>
         </section>
 
@@ -146,7 +180,7 @@
             </div>
             <h2 class="text-4xl md:text-6xl font-bold mb-10 text-du-burgundy">Contact Us</h2>
             <p class="text-lg md:text-xl text-gray-700 mb-8">Get in touch with our admissions team</p>
-            <button class="bg-du-burgundy text-white px-8 py-3 rounded-full font-semibold hover:bg-du-navy hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-du-burgundy">Get Started</button>
+            <button id="getStartedBtn" class="bg-du-burgundy text-white px-8 py-3 rounded-full font-semibold hover:bg-du-navy hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-du-burgundy">Get Started</button>
         </section>
     </main>
 
@@ -159,6 +193,62 @@
             <p class="font-light text-gray-400">&copy; 2025 Delhi University. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Lead Form Modal -->
+    <div id="leadFormModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div class="bg-gradient-to-r from-du-burgundy to-du-navy text-white p-6 rounded-t-2xl relative">
+                <button id="closeModal" class="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <h3 class="text-2xl font-bold mb-2">Apply to Delhi University</h3>
+                <p class="text-sm text-gray-100">Begin your academic journey</p>
+            </div>
+            
+            <form id="leadForm" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-du-burgundy focus:border-transparent transition-all" placeholder="Rahul Kumar">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-du-burgundy focus:border-transparent transition-all" placeholder="rahul@example.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number *</label>
+                    <input type="tel" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-du-burgundy focus:border-transparent transition-all" placeholder="+91 98765 43210">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Program of Interest *</label>
+                    <select name="program" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-du-burgundy focus:border-transparent transition-all">
+                        <option value="">Select a program</option>
+                        <option value="Undergraduate">Undergraduate</option>
+                        <option value="Postgraduate">Postgraduate</option>
+                        <option value="Research">Research/PhD</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Science">Science</option>
+                        <option value="Commerce">Commerce</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Message (Optional)</label>
+                    <textarea name="message" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-du-burgundy focus:border-transparent transition-all" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                
+                <div id="formMessage" class="hidden p-3 rounded-lg text-sm"></div>
+                
+                <button type="submit" class="w-full bg-du-burgundy text-white py-3 rounded-lg font-semibold hover:bg-du-navy transition-all duration-300 hover:shadow-lg">
+                    Submit Application
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script>
