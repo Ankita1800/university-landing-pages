@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIT - Massachusetts Institute of Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mit-red': '#A31F34',
+                        'mit-dark': '#8B1A2E',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-gray-800">
+    <header class="bg-mit-red text-white fixed w-full top-0 z-50 shadow-lg">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+            <div class="text-3xl font-bold tracking-widest">MIT</div>
+            <ul class="flex space-x-8">
+                <li><a href="#about" class="hover:opacity-80 transition-opacity font-medium">About</a></li>
+                <li><a href="#programs" class="hover:opacity-80 transition-opacity font-medium">Programs</a></li>
+                <li><a href="#research" class="hover:opacity-80 transition-opacity font-medium">Research</a></li>
+                <li><a href="#admissions" class="hover:opacity-80 transition-opacity font-medium">Admissions</a></li>
+                <li><a href="#contact" class="hover:opacity-80 transition-opacity font-medium">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="mt-16">
+        <section class="bg-gradient-to-br from-mit-red to-mit-dark text-white text-center py-40 px-8 relative">
+            <div class="relative z-10">
+                <h1 class="text-6xl font-light mb-4">Massachusetts Institute of Technology</h1>
+                <p class="text-3xl italic mb-8">Mind and Hand</p>
+                <button class="bg-white text-mit-red px-10 py-4 rounded-lg text-xl font-semibold hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">Explore MIT</button>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
+        </section>
+
+        <section id="about" class="max-w-7xl mx-auto px-8 py-20">
+            <h2 class="text-5xl font-light text-center mb-8 text-mit-red">About MIT</h2>
+            <p class="text-xl text-center max-w-4xl mx-auto leading-relaxed">Founded in 1861, MIT is a world-renowned institution dedicated to advancing knowledge in science, technology, and innovation. Our mission is to bring knowledge to bear on the world's great challenges.</p>
+        </section>
+
+        <section id="programs" class="max-w-7xl mx-auto px-8 py-20">
+            <h2 class="text-5xl font-light text-center mb-12 text-mit-red">Academic Programs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <div class="bg-gray-50 p-10 rounded-xl text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border-l-4 border-mit-red">
+                    <h3 class="text-2xl text-mit-red mb-4 font-semibold">Engineering</h3>
+                    <p class="leading-relaxed">World-class engineering programs across multiple disciplines</p>
+                </div>
+                <div class="bg-gray-50 p-10 rounded-xl text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border-l-4 border-mit-red">
+                    <h3 class="text-2xl text-mit-red mb-4 font-semibold">Science</h3>
+                    <p class="leading-relaxed">Leading research in physics, chemistry, biology, and mathematics</p>
+                </div>
+                <div class="bg-gray-50 p-10 rounded-xl text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border-l-4 border-mit-red">
+                    <h3 class="text-2xl text-mit-red mb-4 font-semibold">Architecture</h3>
+                    <p class="leading-relaxed">Innovative design and urban planning programs</p>
+                </div>
+                <div class="bg-gray-50 p-10 rounded-xl text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border-l-4 border-mit-red">
+                    <h3 class="text-2xl text-mit-red mb-4 font-semibold">Management</h3>
+                    <p class="leading-relaxed">MIT Sloan School of Management excellence</p>
+                </div>
+                <div class="bg-gray-50 p-10 rounded-xl text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border-l-4 border-mit-red">
+                    <h3 class="text-2xl text-mit-red mb-4 font-semibold">Computing</h3>
+                    <p class="leading-relaxed">Computer science and artificial intelligence leadership</p>
+                </div>
+                <div class="bg-gray-50 p-10 rounded-xl text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 border-l-4 border-mit-red">
+                    <h3 class="text-2xl text-mit-red mb-4 font-semibold">Humanities</h3>
+                    <p class="leading-relaxed">Rich programs in arts, social sciences, and humanities</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="bg-gray-100 rounded-3xl max-w-7xl mx-auto px-8 py-20 my-20">
+            <h2 class="text-5xl font-light text-center mb-8 text-mit-red">Research & Innovation</h2>
+            <p class="text-xl text-center max-w-4xl mx-auto mb-12 leading-relaxed">MIT leads groundbreaking research that addresses global challenges, from climate change to artificial intelligence, healthcare to sustainable energy.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg">
+                    <h3 class="text-5xl text-mit-red mb-2 font-bold">95+</h3>
+                    <p class="text-xl text-gray-600">Nobel Laureates</p>
+                </div>
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg">
+                    <h3 class="text-5xl text-mit-red mb-2 font-bold">$700M+</h3>
+                    <p class="text-xl text-gray-600">Annual Research Expenditure</p>
+                </div>
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg">
+                    <h3 class="text-5xl text-mit-red mb-2 font-bold">30+</h3>
+                    <p class="text-xl text-gray-600">Research Centers</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="max-w-7xl mx-auto px-8 py-20 text-center">
+            <h2 class="text-5xl font-light mb-8 text-mit-red">Get in Touch</h2>
+            <p class="text-xl mb-8">Learn more about opportunities at MIT</p>
+            <button class="bg-white text-mit-red px-10 py-4 rounded-lg text-xl font-semibold hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 border-2 border-mit-red">Contact Admissions</button>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-10">
+        <p>&copy; 2025 Massachusetts Institute of Technology. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delhi University - Premier Education Institution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'du-maroon': '#8B0000',
+                        'du-crimson': '#DC143C',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-gray-800">
+    <header class="bg-du-maroon text-white fixed w-full top-0 z-50 shadow-md">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+            <div class="text-2xl font-bold">Delhi University</div>
+            <ul class="flex space-x-8">
+                <li><a href="#about" class="hover:opacity-80 transition-opacity">About</a></li>
+                <li><a href="#programs" class="hover:opacity-80 transition-opacity">Programs</a></li>
+                <li><a href="#admissions" class="hover:opacity-80 transition-opacity">Admissions</a></li>
+                <li><a href="#contact" class="hover:opacity-80 transition-opacity">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="mt-16">
+        <section class="bg-gradient-to-br from-du-maroon to-du-crimson text-white text-center py-32 px-8">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">Welcome to Delhi University</h1>
+            <p class="text-2xl md:text-3xl mb-8">Empowering minds since 1922</p>
+            <button class="bg-white text-du-maroon px-8 py-4 rounded-lg text-xl font-semibold hover:scale-105 transition-transform duration-300">Apply Now</button>
+        </section>
+
+        <section id="about" class="max-w-7xl mx-auto px-8 py-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-8 text-du-maroon">About Us</h2>
+            <p class="text-lg md:text-xl text-center max-w-4xl mx-auto leading-relaxed">Delhi University is one of India's premier educational institutions, offering world-class education across diverse disciplines.</p>
+        </section>
+
+        <section id="programs" class="max-w-7xl mx-auto px-8 py-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-du-maroon">Our Programs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <div class="bg-gray-100 p-8 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl text-du-maroon mb-4 font-semibold">Undergraduate</h3>
+                    <p class="leading-relaxed">Bachelor's programs in Arts, Science, and Commerce</p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl text-du-maroon mb-4 font-semibold">Postgraduate</h3>
+                    <p class="leading-relaxed">Master's programs across various disciplines</p>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl text-du-maroon mb-4 font-semibold">Research</h3>
+                    <p class="leading-relaxed">PhD and research opportunities</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="max-w-7xl mx-auto px-8 py-16 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-du-maroon">Contact Us</h2>
+            <p class="text-lg md:text-xl">Get in touch with our admissions team</p>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-8">
+        <p>&copy; 2025 Delhi University. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
