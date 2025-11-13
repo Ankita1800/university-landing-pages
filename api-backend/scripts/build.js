@@ -1,78 +1,93 @@
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 /**
  * Build script for the API backend
- * This script can be used to prepare the application for production
+ * This script validates the setup and prepares for production deployment
  */
 
-console.log('Starting build process...');
+console.log('🔨 Building API backend for production...');
 
-// Create dist directory if it doesn't exist
+// Check if required files exist
+const serverPath = path.join(__dirname, '../server.js');
+const packagePath = path.join(__dirname, '../package.json');
+const envPath = path.join(__dirname, '../../.env');
+
+if (!fs.existsSync(serverPath)) {
+    console.error('❌ Error: server.js not found!');
+    process.exit(1);
+}
+
+if (!fs.existsSync(packagePath)) {
+    console.error('❌ Error: package.json not found!');
+    process.exit(1);
+}
+
+console.log('✅ server.js found');
+console.log('✅ package.json found');
+
+// Check .env file
+if (fs.existsSync(envPath)) {
+    console.log('✅ .env file found at root');
+} else {
+    console.warn('⚠️  Warning: .env file not found. Make sure to set environment variables in production.');
+}
+
+// Validate package.json
+try {
+    const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+    console.log(`✅ Package: ${packageJson.name} v${packageJson.version}`);
+    console.log(`✅ Author: ${packageJson.author}`);
+} catch (error) {
+    console.error('❌ Error: Invalid package.json');
+    process.exit(1);
+}
+
+// Check dependencies
+console.log('📦 Checking dependencies...');
+const nodeModulesPath = path.join(__dirname, '../node_modules');
+if (!fs.existsSync(nodeModulesPath)) {
+    console.error('❌ Error: node_modules not found. Run "npm install" first.');
+    process.exit(1);
+}
+
+console.log('✅ Dependencies installed');
+
+// Create dist directory for production
 const distDir = path.join(__dirname, '../dist');
 if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir, { recursive: true });
-    console.log('Created dist directory');
+    console.log('📁 Created dist directory');
 }
 
-// Copy server files
-const serverFile = path.join(__dirname, '../server.js');
-const distServerFile = path.join(distDir, 'server.js');
-
+// Copy server files to dist
 try {
-    fs.copyFileSync(serverFile, distServerFile);
-    console.log('Copied server.js to dist/');
+    fs.copyFileSync(serverPath, path.join(distDir, 'server.js'));
+    fs.copyFileSync(packagePath, path.join(distDir, 'package.json'));
+    console.log('📋 Copied files to dist/');
 } catch (error) {
-    console.error('Error copying server.js:', error.message);
+    console.error('❌ Error copying files:', error.message);
+    process.exit(1);
 }
 
-// Check for package.json
-const packageJsonPath = path.join(__dirname, '../package.json');
-if (fs.existsSync(packageJsonPath)) {
-    const distPackageJson = path.join(distDir, 'package.json');
-    fs.copyFileSync(packageJsonPath, distPackageJson);
-    console.log('Copied package.json to dist/');
-} else {
-    console.warn('No package.json found. Creating a basic one...');
-    
-    const basicPackageJson = {
-        name: 'kollege-apply-backend',
-        version: '1.0.0',
-        description: 'Backend API for university landing pages',
-        main: 'server.js',
-        scripts: {
-            start: 'node server.js',
-            dev: 'nodemon server.js'
-        },
-        dependencies: {
-            express: '^4.18.2',
-            cors: '^2.8.5'
-        },
-        devDependencies: {
-            nodemon: '^3.0.1'
-        }
-    };
-    
-    fs.writeFileSync(
-        path.join(distDir, 'package.json'),
-        JSON.stringify(basicPackageJson, null, 2)
-    );
-    console.log('Created package.json in dist/');
-}
-
-// Create .env.example if it doesn't exist
-const envExample = path.join(__dirname, '../.env.example');
-if (!fs.existsSync(envExample)) {
+// Create .env.example for reference
+const envExamplePath = path.join(__dirname, '../.env.example');
+if (!fs.existsSync(envExamplePath)) {
     const envContent = `PORT=3000
 NODE_ENV=production
+# Add other environment variables here
 `;
-    fs.writeFileSync(envExample, envContent);
-    console.log('Created .env.example');
+    fs.writeFileSync(envExamplePath, envContent);
+    console.log('📄 Created .env.example');
 }
 
-console.log('\nBuild completed successfully!');
-console.log(`Output directory: ${distDir}`);
-console.log('\nNext steps:');
-console.log('1. cd to the dist directory');
-console.log('2. Run: npm install');
-console.log('3. Run: npm start');
+// Build success
+console.log('\n🎉 Build completed successfully!');
+console.log('📌 Ready for deployment');
+console.log(`📂 Output: ${distDir}`);
+console.log('\n💡 To start the server:');
+console.log('   npm start');
+console.log('\n💡 For development with auto-reload:');
+console.log('   npm run dev');
+
