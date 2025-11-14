@@ -40,7 +40,6 @@ app.get('/', (req, res) => {
                 contact: 'POST /api/contact'
             }
         },
-        documentation: 'See README.md for full API documentation'
     });
 });
 
