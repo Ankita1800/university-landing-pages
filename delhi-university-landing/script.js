@@ -61,8 +61,28 @@ async function loadFees() {
     try {
         feesContent.innerHTML = '<div class="flex justify-center py-8"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-du-burgundy"></div></div>';
         
-        const response = await fetch(`${API_BASE_URL}/api/fees/delhi-university`);
+        console.log('🔄 Fetching fees from:', `${API_BASE_URL}/api/fees/delhi-university`);
+        console.log('🌐 Current hostname:', window.location.hostname);
+        
+        // Add timeout to prevent infinite loading
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+        
+        const response = await fetch(`${API_BASE_URL}/api/fees/delhi-university`, {
+            signal: controller.signal,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
         const data = await response.json();
+        console.log('✅ Fees data received:', data);
         
         if (data.success) {
             let html = '';
@@ -135,8 +155,28 @@ async function loadFees() {
             feesContent.innerHTML = html;
         }
     } catch (error) {
-        console.error('Error loading fees:', error);
-        feesContent.innerHTML = '<div class="p-8 text-center text-red-600">Error loading fees data. Please try again later.</div>';
+        console.error('❌ Error loading fees:', error);
+        
+        let errorMessage = error.message;
+        if (error.name === 'AbortError') {
+            errorMessage = 'Request timeout - The API server may be sleeping (cold start). Please try again in 30 seconds.';
+        } else if (error.message.includes('Failed to fetch')) {
+            errorMessage = 'Network error - Cannot reach API server. Check your internet connection.';
+        }
+        
+        feesContent.innerHTML = `<div class="p-8 text-center">
+            <div class="text-red-600 mb-4">
+                <svg class="mx-auto h-12 w-12 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="font-bold text-lg mb-2">Error Loading Fees</p>
+                <p class="text-sm mb-3">${errorMessage}</p>
+            </div>
+            <button onclick="loadFees()" class="bg-du-burgundy text-white px-6 py-2 rounded-lg hover:bg-du-burgundy/90 transition-colors">
+                Retry
+            </button>
+            <p class="text-xs mt-4 text-gray-500">API Endpoint: ${API_BASE_URL}/api/fees/delhi-university</p>
+        </div>`;
     }
 }
 
